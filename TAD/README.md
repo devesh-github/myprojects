@@ -1,13 +1,3 @@
-1. prepare test data - done
-2. Read from a single file - done
-3. Validation layer - done
-4. policy interface - done
-5. Rule implementation
-6. Writing output
-7. Code execution - done
-8. Test Cases - done
-9. Read Me - done
-
 Instructions
 --------------------
 

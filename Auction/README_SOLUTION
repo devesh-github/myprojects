@@ -1,0 +1,33 @@
+===========================================
+THOUGHT MACHINE
+Programming Solution - Auction House
+===========================================
+
+** Execution: **
+
+The solution has a trigger point as AuctionDriver. This class reads the input file path from property file
+and reads the data line by ine as its time based solution. Upon reading the file it calls one of its services
+mentioned below through BidProcessor to handle the population/calculation/execution of data.
+
+BidProcessor:
+It gives abstraction layer to overall service layer. Works with input params provided.
+
+Services ::
+BidStartService: It handles the SELL records
+BidPopulationService: It handles the actual BID population and internal logic
+BidExecutionService: Based on the CLOSE_TIME, this service finalizes the BID and output the same
+
+TestCases:
+AuctionDriverTest1: To test end to end logic
+BidProcessTest: To test service wise logic
+These 2 cover overall logic of the solution
+
+Trigger Point:
+AuctionDriver's main method can be called to run the overall program.
+
+Input/Output:
+input.txt: Consists of the input data
+output.txt: Consists of the output data
+
+Properties file:
+application.properties: Keeps all properties of the program

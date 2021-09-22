@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.dev.tm</groupId>
+	<artifactId>auction</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<properties>
+		<mockito.version>1.9.0</mockito.version>
+		<hamcrest.version>1.1</hamcrest.version>
+		<junit.version>4.10</junit.version>
+		<powermock.version>1.4.9</powermock.version>
+		<apache.commons-io.version>1.4</apache.commons-io.version>
+		<apache.commons-lang.version>2.4</apache.commons-lang.version>
+		<apache.commons-cli.version>1.2</apache.commons-cli.version>
+		<slf4j.version>1.6.1</slf4j.version>
+		<log4j.version>1.2.15</log4j.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source />
+					<target />
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.10</version>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,3 @@
+com\dev\stockmarket\stock\controller\SSStockControllerTest.class
+com\dev\stockmarket\trade\controller\SSTradeControllerTest.class
+com\dev\stockmarket\controller\StockMarketControllerTest.class

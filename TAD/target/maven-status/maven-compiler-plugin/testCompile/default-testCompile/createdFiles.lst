@@ -1,2 +1,3 @@
 com\dev\trns\utils\DateUtilTest.class
 com\dev\trns\services\DatePolicyTest.class
+com\dev\trns\driver\TrnsAnomalyDriverTest.class

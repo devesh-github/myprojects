@@ -2,6 +2,8 @@ com\dev\trns\services\TrnsValidationService.class
 com\dev\trns\services\PolicyService.class
 com\dev\trns\driver\PolicyExecutor.class
 com\dev\trns\constant\TrnsConstants.class
+com\dev\trns\driver\TrnsAnomalyDriver.class
 com\dev\trns\services\DatePolicy.class
 com\dev\trns\services\AccountPolicy.class
+com\dev\trns\utils\TrnsUtil.class
 com\dev\trns\utils\DateUtil.class

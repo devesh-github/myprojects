@@ -21,8 +21,8 @@ public class TrnsAnomalyDriverTest {
     @Test
     public void copyUsingChunks() {
         TrnsAnomalyDriver tad = new TrnsAnomalyDriver();
-        String source = "C:\\Users\\Devesh\\OpenSourceGitProjects\\TAD\\src\\test\\resources\\testinputdata.txt";
-        String target = "C:\\Users\\Devesh\\OpenSourceGitProjects\\TAD\\src\\test\\resources\\testoutputdata.txt";
+        String source = "G:\\Devesh\\myprojects\\TAD\\src\\test\\resources\\testinputdata.txt";
+        String target = "G:\\Devesh\\myprojects\\TAD\\src\\test\\resources\\testoutputdata.txt";
         try {
             tad.readInputFileUsingChunks(source, target);
         } catch (Exception e) {

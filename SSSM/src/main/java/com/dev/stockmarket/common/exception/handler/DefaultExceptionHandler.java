@@ -21,7 +21,6 @@ import com.dev.stockmarket.common.exception.SssmRestException;
 import com.dev.stockmarket.common.model.SssmAPIResponse;
 import com.dev.stockmarket.common.model.ResultCode;
 
-
 @ControllerAdvice
 public class DefaultExceptionHandler {
 	
@@ -30,7 +29,6 @@ public class DefaultExceptionHandler {
     private HttpHeaders generateContentTypeHeaders(HttpServletRequest req) {
 
         HttpHeaders responseHeaders = new HttpHeaders();
-
         log.debug("content-type : {}", req.getContentType());
         if (StringUtils.containsIgnoreCase(req.getContentType(), "multipart/form-data")) {
             responseHeaders.add("Content-Type", MediaType.TEXT_PLAIN_VALUE);
@@ -39,20 +37,16 @@ public class DefaultExceptionHandler {
         }
 
         return responseHeaders;
-
     }
 
     @ExceptionHandler (SssmRestException.class)
     public ResponseEntity<SssmAPIResponse<String>> handleRestException(SssmRestException ex, HttpServletRequest req) throws IOException {
 
         log.error("RestException error : code [{}] , message [{}]", ex.getErrorCode(), ex.getMessage());
-
         log.debug("Exception Message ", ex);
 
         SssmAPIResponse<String> failResponse = null;
-
         failResponse = new SssmAPIResponse<String>(ex.getErrorCode(), ex.getMessage());
-
         int httpStatusCode = HttpStatus.BAD_REQUEST.value();
 
         if (ex.getErrorCode() != null) {
@@ -60,18 +54,15 @@ public class DefaultExceptionHandler {
         }
 
         return new ResponseEntity<SssmAPIResponse<String>>(failResponse, generateContentTypeHeaders(req), HttpStatus.valueOf(httpStatusCode));
-
     }
     
     @ExceptionHandler ({TypeMismatchException.class})
     public ResponseEntity<SssmAPIResponse<String>> handleMismatchException(TypeMismatchException ex, HttpServletRequest req) throws IOException {
 
         log.error("RestException error : code [{}] , message [{}]", ex.getErrorCode(), ex.getMessage());
-
         log.debug("Exception Message ", ex);
 
         SssmAPIResponse<String> failResponse = null;
-
         failResponse = new SssmAPIResponse<String>(ResultCode.BAD_REQUEST);
 
         if (ex.getCause() != null) {
@@ -80,22 +71,15 @@ public class DefaultExceptionHandler {
             failResponse.setData(ex.getMessage());
         }
 
-
         return new ResponseEntity<SssmAPIResponse<String>>(failResponse, generateContentTypeHeaders(req), HttpStatus.BAD_REQUEST);
-
     }
     
     @ExceptionHandler (HttpMessageNotReadableException.class)
     public ResponseEntity<SssmAPIResponse<String>> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex, HttpServletRequest req) throws IOException {
 
-
         log.error("RestException error : message [{}]", ex.getMessage());
-
         log.debug("Exception Message ", ex);
-        
-
         SssmAPIResponse<String> failResponse = null;
-
         failResponse = new SssmAPIResponse<String>(ResultCode.BAD_REQUEST);
 
         if (ex.getMostSpecificCause() != null) {
@@ -103,19 +87,14 @@ public class DefaultExceptionHandler {
         } else {
             failResponse.setData(ex.getMessage());
         }
-
-
         return new ResponseEntity<SssmAPIResponse<String>>(failResponse, generateContentTypeHeaders(req), HttpStatus.BAD_REQUEST);
-
     }
     
     @ExceptionHandler (MissingServletRequestParameterException.class)
     public ResponseEntity<SssmAPIResponse<String>> handleMissingServletRequestParameterException(MissingServletRequestParameterException ex, HttpServletRequest req) throws IOException {
 
         log.error("MissingServletRequestParameterException {}", ex);
-
         SssmAPIResponse<String> failResponse = null;
-
         failResponse = new SssmAPIResponse<String>(ResultCode.BAD_REQUEST);
 
         if (ex.getCause() != null) {
@@ -123,9 +102,7 @@ public class DefaultExceptionHandler {
         } else {
             failResponse.setData(ex.getMessage());
         }
-
         return new ResponseEntity<SssmAPIResponse<String>>(failResponse, generateContentTypeHeaders(req), HttpStatus.BAD_REQUEST);
-
     }
 
 
@@ -133,19 +110,14 @@ public class DefaultExceptionHandler {
     public ResponseEntity<SssmAPIResponse<String>> handleException(Exception ex, HttpServletRequest req) throws IOException {
 
         log.error("UNKNOWN EXCEPTION", ex);
-
         SssmAPIResponse<String> failResponse = null;
-
         failResponse = new SssmAPIResponse<String>(ResultCode.INTERNAL_SERVER_ERROR);
-
         if (ex.getCause() != null) {
             failResponse.setData(ex.getCause().getMessage());
         } else {
             failResponse.setData(ex.getMessage());
         }
-
         return new ResponseEntity<SssmAPIResponse<String>>(failResponse, generateContentTypeHeaders(req), HttpStatus.INTERNAL_SERVER_ERROR);
-
     }
 
 }

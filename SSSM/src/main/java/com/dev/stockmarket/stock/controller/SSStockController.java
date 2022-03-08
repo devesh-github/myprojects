@@ -27,10 +27,8 @@ public class SSStockController {
 
 	@ApiOperation(value = "Calculate Dividend Yield", notes = "Calculate Dividend Yield for given stock symbol and price")
 	@RequestMapping(value = "/stock/{symbol}/dividendyield", method = RequestMethod.GET)
-	@ApiImplicitParams({
-			@ApiImplicitParam(required = true, name = "symbol", paramType = "path", value = "stock symbol") })
-	public GetDividendYieldResponse getDividentYield(@RequestParam(required = true) Double stockPrice,
-			@PathVariable(required=true,name="symbol") String symbol) {
+	@ApiImplicitParams({@ApiImplicitParam(required = true, name = "symbol", paramType = "path", value = "stock symbol") })
+	public GetDividendYieldResponse getDividentYield(@RequestParam(required = true) Double stockPrice,@PathVariable(required=true,name="symbol") String symbol) {
 		if (stockPrice <= 0) {
 			throw new SssmRestException(ResultCode.BAD_REQUEST, "stockPrice should be positive");
 		}
@@ -42,10 +40,8 @@ public class SSStockController {
 
 	@ApiOperation(value = "Calculate PE Ratio", notes = "Calculate PE Ratio for given stock symbol and price")
 	@RequestMapping(value = "/stock/{symbol}/peratio", method = RequestMethod.GET)
-	@ApiImplicitParams({
-			@ApiImplicitParam(required = true, name = "symbol", paramType = "path", value = "stock symbol") })
-	public GetPERatioResponse getPERatio(@RequestParam(required = true) Double stockPrice,
-			@PathVariable("symbol") String symbol) {
+	@ApiImplicitParams({@ApiImplicitParam(required = true, name = "symbol", paramType = "path", value = "stock symbol") })
+	public GetPERatioResponse getPERatio(@RequestParam(required = true) Double stockPrice,@PathVariable("symbol") String symbol) {
 		if (stockPrice <= 0) {
 			throw new SssmRestException(ResultCode.BAD_REQUEST, "stockPrice should be positive");
 		}
@@ -58,8 +54,7 @@ public class SSStockController {
 
 	@ApiOperation(value = "Calculate Volume Weighted Price", notes = "Calculate Volume Weighted Price for given stock symbol")
 	@RequestMapping(value = "/stock/{symbol}/vwprice", method = RequestMethod.GET)
-	@ApiImplicitParams({
-			@ApiImplicitParam(required = true, name = "symbol", paramType = "path", value = "stock symbol") })
+	@ApiImplicitParams({@ApiImplicitParam(required = true, name = "symbol", paramType = "path", value = "stock symbol") })
 	public GetVolWeightedResponse getVolumeWeightedPrice(@PathVariable("symbol") String symbol) {
 		Double volWeightedPrice = stockService.getVolWeightedPice(symbol);
 
@@ -67,4 +62,5 @@ public class SSStockController {
 				.volWeighedPrice(volWeightedPrice).build();
 		return response;
 	}
+
 }

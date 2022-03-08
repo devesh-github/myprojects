@@ -14,26 +14,23 @@ import com.dev.stockmarket.stock.model.StockType;
 @Component
 public class StockMarketDB {
 
-	@Value("${temp.database.stock.symbol:TEA,POP,ALE,GIN,JOE}")
+	@Value("${temp.database.stock.symbol}")
 	private String stockSymbols;
 
-	@Value("${temp.database.stock.type:Common,Common,Common,Preferred,Common}")
+	@Value("${temp.database.stock.type}")
 	private String stockTypes;
 
-	@Value("${temp.database.stock.lastDividend:0,8,23,8,13}")
+	@Value("${temp.database.stock.lastDividend}")
 	private String stockLastDividends;
 
-	@Value("${temp.database.stock.fixedDividend:0,0,0,2,0}")
+	@Value("${temp.database.stock.fixedDividend}")
 	private String stockFixedDividends;
 
-	@Value("${temp.database.stock.parValue:100,100,60,100,250}")
+	@Value("${temp.database.stock.parValue}")
 	private String stockParValues;
 
 	private ConcurrentHashMap<String, Stock> stockMarketDB;
 
-	/*
-	 * Fill Stock related Data in the Map
-	 */
 	@PostConstruct
 	private void initialize() {
 		if (stockMarketDB == null) {
@@ -65,7 +62,6 @@ public class StockMarketDB {
 		if (stockMarketDB == null){
 			initialize();
 		}
-		
 		return stockMarketDB;
 	}
 }

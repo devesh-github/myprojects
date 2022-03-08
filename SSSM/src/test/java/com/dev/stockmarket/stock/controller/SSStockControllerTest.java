@@ -27,11 +27,11 @@ public class SSStockControllerTest {
 	private static ObjectMapper mapper = new ObjectMapper();
 
     @Autowired
-    private MockMvc mvc;
+    private MockMvc mockMvc;
 
     @Test
     public void getDividendYieldWithInvalidSymbol() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/exchange/stock/abc/dividendyield?stockPrice=10.0").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/exchange/stock/abc/dividendyield?stockPrice=10.0").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value(equalTo(ResultCode.STOCK_NOT_FOUND.getCode())))
                 .andExpect(jsonPath("$.message").value(equalTo(ResultCode.STOCK_NOT_FOUND.getMessage())));
@@ -39,7 +39,7 @@ public class SSStockControllerTest {
     
     @Test
     public void getDividendYieldWithNoPrice() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP/dividendyield").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP/dividendyield").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(equalTo(ResultCode.BAD_REQUEST.getCode())))
                 .andExpect(jsonPath("$.message").value(equalTo(ResultCode.BAD_REQUEST.getMessage())));
@@ -47,7 +47,7 @@ public class SSStockControllerTest {
     
     @Test
     public void getDividendYield() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP/dividendyield?stockPrice=2").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP/dividendyield?stockPrice=2").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.dividendYield").value(equalTo(4.0)))
                 .andExpect(jsonPath("$.symbol").value(equalTo("POP")));
@@ -55,7 +55,7 @@ public class SSStockControllerTest {
     
     @Test
     public void getPERatioWithInvalidSymbol() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/exchange/stock/abc/peratio?stockPrice=10.0").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/exchange/stock/abc/peratio?stockPrice=10.0").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value(equalTo(ResultCode.STOCK_NOT_FOUND.getCode())))
                 .andExpect(jsonPath("$.message").value(equalTo(ResultCode.STOCK_NOT_FOUND.getMessage())));
@@ -63,7 +63,7 @@ public class SSStockControllerTest {
     
     @Test
     public void getPERatioWithNoPrice() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP/peratio").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP/peratio").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value(equalTo(ResultCode.BAD_REQUEST.getCode())))
                 .andExpect(jsonPath("$.message").value(equalTo(ResultCode.BAD_REQUEST.getMessage())));
@@ -71,7 +71,7 @@ public class SSStockControllerTest {
     
     @Test
     public void getPERatio() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP/peratio?stockPrice=2").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP/peratio?stockPrice=2").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.peRatio").value(equalTo(0.5)))
                 .andExpect(jsonPath("$.symbol").value(equalTo("POP")));
@@ -82,7 +82,7 @@ public class SSStockControllerTest {
     	postTrade("POP", 10l, 10.0);
     	postTrade("POP", 20l, 20.0);
     	
-        mvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP1/vwprice").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP1/vwprice").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value(equalTo(ResultCode.STOCK_NOT_FOUND.getCode())))
                 .andExpect(jsonPath("$.message").value(equalTo(ResultCode.STOCK_NOT_FOUND.getMessage())));
@@ -93,7 +93,7 @@ public class SSStockControllerTest {
     	postTrade("POP", 10l, 10.0);
     	postTrade("POP", 20l, 20.0);
     	
-        mvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP/vwprice").accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(MockMvcRequestBuilders.get("/exchange/stock/POP/vwprice").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.volWeighedPrice").value(equalTo(16.666666666666668)))
                 .andExpect(jsonPath("$.symbol").value(equalTo("POP")));
@@ -107,7 +107,7 @@ public class SSStockControllerTest {
         request.setTradePrice(tradePrice);
         request.setType(TradeType.Buy);
         
-     	mvc.perform(
+     	mockMvc.perform(
                  post("/exchange/trade")
                  .contentType(MediaType.APPLICATION_JSON)
      			.content(mapper.writeValueAsString(request))

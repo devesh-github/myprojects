@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cockroach
+spec:
+  ports:
+    - port: 26257
+      name: grpc
+  selector:
+    app: cockroach
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cockroach
+spec:
+  serviceName: "cockroach"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cockroach
+  template:
+    metadata:
+      labels:
+        app: cockroach
+    spec:
+      containers:
+        - name: cockroach
+          image: cockroachdb/cockroach:latest-v25.2
+          args: ["start-single-node", "--insecure"]
+          ports:
+            - containerPort: 26257
+            - containerPort: 8080
+          volumeMounts:
+            - name: data
+              mountPath: /cockroach/cockroach-data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 5Gi

@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://cockroach:26257/payments?sslmode=disable
+    username: root
+    password:
+  jpa:
+    properties:
+      hibernate:
+        #dilect: org.hibernate.dialect.CockroachDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+kafka:
+  bootstrap-servers: kafka:9092
+  topic:
+    payment-created: payments.created
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
